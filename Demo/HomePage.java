@@ -29,10 +29,10 @@ public class HomePage extends javax.swing.JFrame {
     
     public HomePage() {
         initComponents();
-        layout = new CardLayout();
-        jPanel1.setVisible(true);
-        jPanel2.setLayout(layout); 
-        jPanel2.add("Customer", new CustomerPage());
+        // layout = new CardLayout();
+        // jPanel1.setVisible(true);
+        // jPanel2.setLayout(layout); 
+        // jPanel2.add("Customer", new CustomerPage());
         setVisible(true);
     }
 
