@@ -24,18 +24,27 @@ import javax.swing.JPanel;
  * @author Admin
  */
 public class HomePage extends javax.swing.JFrame {
-    
+        
     CardLayout layout;
     
     public HomePage() {
         initComponents();
-        // layout = new CardLayout();
-        // jPanel1.setVisible(true);
-        // jPanel2.setLayout(layout); 
-        // jPanel2.add("Customer", new CustomerPage());
+        jPanel1.setVisible(true);
+        // set layout
+        layout = new CardLayout();
+        jPanel2.setLayout(layout);
+        jPanel2.add("Products", new ProductPage());
+        jPanel2.add("Customers", new CustomerPage());
+        //
+        setTitle("Inventory Manager");
         setVisible(true);
     }
-
+    public void addCustPage() {
+        layout.show(jPanel2, "Customers");
+    }
+    public void addProdPage() {
+        layout.show(jPanel2, "Products");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,7 +66,6 @@ public class HomePage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(160, 55));
         setMinimumSize(new java.awt.Dimension(1250, 700));
-        setPreferredSize(new java.awt.Dimension(1250, 700));
 
         jPanel1.setBackground(new java.awt.Color(255, 51, 51));
 
@@ -153,17 +161,14 @@ public class HomePage extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1083, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1085, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                .addGap(0, 0, 0))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
         );
 
         pack();
@@ -177,6 +182,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        // TODO add your handling code here:
+       addCustPage();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -186,6 +192,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        addProdPage();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
