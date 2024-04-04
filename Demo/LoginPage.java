@@ -4,6 +4,9 @@
  */
 package Demo;
 import Demo.HomePage;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  *
@@ -39,6 +42,7 @@ public class LoginPage extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 204));
         setLocation(new java.awt.Point(160, 55));
         setMinimumSize(new java.awt.Dimension(1250, 700));
+        setPreferredSize(new java.awt.Dimension(1250, 700));
 
         jPanel2.setBackground(new java.awt.Color(51, 51, 51));
         jPanel2.setLayout(new java.awt.GridBagLayout());
@@ -138,17 +142,27 @@ public class LoginPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void checkLoginAction() {
-        String passText = jPasswordField1.getText();
-        checkLogin = passText.equalsIgnoreCase("123");
-        if(checkLogin) {
-            dispose();
-            HomePage home = new HomePage("ADMIN");
-        } else {
-            jPasswordField1.setText("");
-            jTextField1.setText("");
-            jLabel2.setText("Tài khoản hoặc mật khẩu không chính xác !!!");
-            jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-            jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        String email = jTextField1.getText();
+        String password = new String(jPasswordField1.getPassword());
+        try {
+            Connection con = Database.ConnectionProvider.getCon();
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM nguoidung WHERE email = ? AND password = ?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                dispose();
+                HomePage home = new HomePage("ADMIN");
+            } else {
+                jPasswordField1.setText("");
+                jTextField1.setText("");
+                jLabel2.setText("Tài khoản hoặc mật khẩu không chính xác !!!");
+                jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+                jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
