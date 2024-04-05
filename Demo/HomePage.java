@@ -4,6 +4,7 @@
  */
 package Demo;
 import Demo.LoginPage;
+import Demo.EmployeePage;
 import Demo.CustomerPage;
 import Demo.ProductPage;
 import java.awt.BorderLayout;
@@ -30,13 +31,14 @@ public class HomePage extends javax.swing.JFrame {
         initComponents();
         // set layout
         layout = new CardLayout();
-        jPanel2.setLayout(layout);
-        jPanel2.add("Products", new ProductPage());
-        jPanel2.add("Customers", new CustomerPage());        
+        displayPanel.setLayout(layout);
+        displayPanel.add("Products", new ProductPage());
+        displayPanel.add("Customers", new CustomerPage());
+        displayPanel.add("Employees", new EmployeePage());
         // Them hoa don vao cardlayout
         if("EMPLOYEE".equalsIgnoreCase(userType)) {
             jPanel3.remove(HoadonBt);
-            jPanel3.remove(DoanhthuBt);
+            jPanel3.remove(ThongkeBtn);
         }
         //
 //        getCurrentUser();
@@ -44,10 +46,13 @@ public class HomePage extends javax.swing.JFrame {
         setVisible(true);
     }
     public void addCustPage() {
-        layout.show(jPanel2, "Customers");
+        layout.show(displayPanel, "Customers");
     }
     public void addProdPage() {
-        layout.show(jPanel2, "Products");
+        layout.show(displayPanel, "Products");
+    }
+    public void addEmployPage() {
+        layout.show(displayPanel, "Employees");
     }
     ///////////////
     private void getCurrentUser() {
@@ -68,16 +73,15 @@ public class HomePage extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         HoadonBt = new javax.swing.JButton();
         NhanvienBt = new javax.swing.JButton();
-        DoanhthuBt = new javax.swing.JButton();
+        ThongkeBtn = new javax.swing.JButton();
         LogoutBt = new javax.swing.JButton();
         KhachhangBt = new javax.swing.JButton();
         SanphamBt = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        displayPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(160, 55));
         setMinimumSize(new java.awt.Dimension(1250, 700));
-        setPreferredSize(new java.awt.Dimension(1250, 700));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -121,6 +125,11 @@ public class HomePage extends javax.swing.JFrame {
         NhanvienBt.setMaximumSize(new java.awt.Dimension(63, 26));
         NhanvienBt.setMinimumSize(new java.awt.Dimension(63, 26));
         NhanvienBt.setPreferredSize(new java.awt.Dimension(63, 26));
+        NhanvienBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NhanvienBtActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -130,16 +139,16 @@ public class HomePage extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(35, 20, 0, 28);
         jPanel3.add(NhanvienBt, gridBagConstraints);
 
-        DoanhthuBt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        DoanhthuBt.setText("Doanh thu");
-        DoanhthuBt.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        DoanhthuBt.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        DoanhthuBt.setMaximumSize(new java.awt.Dimension(63, 26));
-        DoanhthuBt.setMinimumSize(new java.awt.Dimension(63, 26));
-        DoanhthuBt.setPreferredSize(new java.awt.Dimension(63, 26));
-        DoanhthuBt.addActionListener(new java.awt.event.ActionListener() {
+        ThongkeBtn.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        ThongkeBtn.setText("Thống kê");
+        ThongkeBtn.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        ThongkeBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ThongkeBtn.setMaximumSize(new java.awt.Dimension(63, 26));
+        ThongkeBtn.setMinimumSize(new java.awt.Dimension(63, 26));
+        ThongkeBtn.setPreferredSize(new java.awt.Dimension(63, 26));
+        ThongkeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                DoanhthuBtActionPerformed(evt);
+                ThongkeBtnActionPerformed(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -149,7 +158,7 @@ public class HomePage extends javax.swing.JFrame {
         gridBagConstraints.ipady = 27;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(35, 20, 0, 28);
-        jPanel3.add(DoanhthuBt, gridBagConstraints);
+        jPanel3.add(ThongkeBtn, gridBagConstraints);
 
         LogoutBt.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         LogoutBt.setText("Đăng xuất");
@@ -236,10 +245,10 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setMinimumSize(new java.awt.Dimension(1075, 700));
-        jPanel2.setPreferredSize(new java.awt.Dimension(1075, 700));
-        jPanel2.setLayout(new java.awt.CardLayout());
+        displayPanel.setBackground(new java.awt.Color(255, 255, 255));
+        displayPanel.setMinimumSize(new java.awt.Dimension(1075, 700));
+        displayPanel.setPreferredSize(new java.awt.Dimension(1075, 700));
+        displayPanel.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,7 +258,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 1075, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1075, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
@@ -258,7 +267,7 @@ public class HomePage extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                    .addComponent(displayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, 0))
         );
 
@@ -286,24 +295,30 @@ public class HomePage extends javax.swing.JFrame {
         addProdPage();
     }//GEN-LAST:event_SanphamBtActionPerformed
 
-    private void DoanhthuBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DoanhthuBtActionPerformed
+    private void ThongkeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThongkeBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_DoanhthuBtActionPerformed
+    }//GEN-LAST:event_ThongkeBtnActionPerformed
 
+    private void NhanvienBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NhanvienBtActionPerformed
+        // TODO add your handling code here:
+        addEmployPage();
+    }//GEN-LAST:event_NhanvienBtActionPerformed
+
+ 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton DoanhthuBt;
     private javax.swing.JButton HoadonBt;
     private javax.swing.JButton KhachhangBt;
     private javax.swing.JButton LogoutBt;
     private javax.swing.JButton NhanvienBt;
     private javax.swing.JButton SanphamBt;
+    private javax.swing.JButton ThongkeBtn;
+    private javax.swing.JPanel displayPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
