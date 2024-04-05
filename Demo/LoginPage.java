@@ -19,6 +19,7 @@ public class LoginPage extends javax.swing.JFrame {
      */
     public LoginPage() {
         initComponents();
+        setTitle("Cửa hàng đồ chơi trẻ em");
         setVisible(true);
     }
     /**
@@ -146,7 +147,7 @@ public class LoginPage extends javax.swing.JFrame {
         String password = new String(jPasswordField1.getPassword());
         try {
             Connection con = Database.ConnectionProvider.getCon();
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM nguoidung WHERE email = ? AND password = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM NhanVien WHERE Taikhoan = ? AND Matkhau = ?");
             ps.setString(1, email);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
@@ -164,6 +165,9 @@ public class LoginPage extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void getCurrentUser() {
+        
     }
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
 

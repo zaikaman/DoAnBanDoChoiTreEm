@@ -12,8 +12,10 @@ public class tables {
         try {
             con = ConnectionProvider.getCon();
             st = con.createStatement();
-            st.executeUpdate("create table nguoidung(nguoidung_pk int AUTO_INCREMENT primary key,userRole varchar(50),name varchar(200),mobileNumber varchar(50),email varchar(200),password varchar(50), address varchar(200),status varchar(50))");
-            st.executeUpdate("insert into nguoidung (userRole,name,mobileNumber,email,password,address,status) values('QuanLy','Quan Ly','12345','ad','admin','Vietnam','true')");
+            st.executeUpdate("create table NhanVien(Id int AUTO_INCREMENT primary key primary key, Vitri varchar(50),Ten varchar(200),Sdt varchar(50), Taikhoan varchar(50), Matkhau varchar(50), Email varchar(200),Status varchar(50))");
+            st.executeUpdate("insert into NhanVien(Vitri,Ten,Sdt,Taikhoan,Matkhau,Email,Status) values('Quản lí','Nguyễn Ngọc Tuấn','081231244','tuan','123','tuan@gmail.com','true')");
+//            st.executeUpdate("create table SanPham(Id int AUTO_INCREMENT primary key, Ten varchar(50),Xuatxu varchar(50), Giatien varchar(50),Soluongconlai int,Status varchar(50))");
+//            st.executeUpdate("insert into SanPham(Ten,Xuatxu,Giatien,Soluongconlai,Status) values('Lego','Vietnam','200.000d',45,'true')");
             JOptionPane.showMessageDialog(null, "Da tao bang thanh cong");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
